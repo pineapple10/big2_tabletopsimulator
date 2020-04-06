@@ -1,0 +1,21 @@
+<!-- Xml UI. See documentation: https://api.tabletopsimulator.com/ui/introUI/ -->
+<TableLayout id="SortCardsAZButtonPanel"
+  active="true"
+  allowDragging="true"
+  returnToOriginalPositionWhenReleased="false"
+  width="10%"
+  height="10%"
+  rectAlignment="LowerCenter"
+  offsetXY="220 220"
+  rowBackgroundColor="black"
+  visibility="">
+  <row>
+    <cell>
+      <button
+        onClick="Global/sortCards"
+        id="sortCardsButton"
+        fontStyle="Bold"
+        fontSize="22">Sort Low -> High</button>
+    </cell>
+  </row>
+</TableLayout>
