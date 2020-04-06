@@ -2,9 +2,9 @@
 -- #include Console/console++
 
 --[[ GUID Static References]]
-tileGUID = 'eecb5f'
-boardGUID = '6fee03'
-deckZoneGUID ='cb40d7'
+tileGUID = "eecb5f"
+boardGUID = "6fee03"
+deckZoneGUID = "cb40d7"
 
 --[[ Coordinate References]]
 deckStartingPosition = {0, 2.75, 0}
@@ -15,70 +15,70 @@ hasDealtCards = 0
 
 --[[Card GUID References from 0-52]]
 CARDGUIDS = {
-	'6e1fec',
-	'be07dd',
-	'502327',
-	'a996ee',
-	'6a301a',
-	'1e43bf',
-	'23434b',
-	'ab111f',
-	'fa391b',
-	'aa1e90',
-	'e43649',
-	'd784ba',
-	'4b5a3c',
-	'2266f9',
-	'444f10',
-	'48f3d4',
-	'37d224',
-	'dd90c4',
-	'9b01ed',
-	'977cd3',
-	'91d142',
-	'27077a',
-	'c4c752',
-	'7ef5e2',
-	'3787d3',
-	'8b2d2a',
-	'a557be',
-	'9bb02e',
-	'12b44c',
-	'9f0d35',
-	'a0df02',
-	'ff2914',
-	'8b4625',
-	'125a63',
-	'303555',
-	'dd07ea',
-	'fc2e4e',
-	'987297',
-	'1e0d73',
-	'd2c01e',
-	'c51c8d',
-	'dee062',
-	'e235ff',
-	'3b3527',
-	'879137',
-	'87f25f',
-	'a4c3e8',
-	'c939fa',
-	'2926f7',
-	'63150d',
-	'da0441',
-	'b44a11'
+    "6e1fec",
+    "be07dd",
+    "502327",
+    "a996ee",
+    "6a301a",
+    "1e43bf",
+    "23434b",
+    "ab111f",
+    "fa391b",
+    "aa1e90",
+    "e43649",
+    "d784ba",
+    "4b5a3c",
+    "2266f9",
+    "444f10",
+    "48f3d4",
+    "37d224",
+    "dd90c4",
+    "9b01ed",
+    "977cd3",
+    "91d142",
+    "27077a",
+    "c4c752",
+    "7ef5e2",
+    "3787d3",
+    "8b2d2a",
+    "a557be",
+    "9bb02e",
+    "12b44c",
+    "9f0d35",
+    "a0df02",
+    "ff2914",
+    "8b4625",
+    "125a63",
+    "303555",
+    "dd07ea",
+    "fc2e4e",
+    "987297",
+    "1e0d73",
+    "d2c01e",
+    "c51c8d",
+    "dee062",
+    "e235ff",
+    "3b3527",
+    "879137",
+    "87f25f",
+    "a4c3e8",
+    "c939fa",
+    "2926f7",
+    "63150d",
+    "da0441",
+    "b44a11"
 }
 
 --[[Player Colour References]]
 PLAYERCOLORS = {
-  "Green",
-  "Blue",
-  "Purple",
-  "Pink",
-  "White",
-  "Red",
-  "Orange",
-  "Yellow"
+    "Green",
+    "Blue",
+    "Purple",
+    "Pink",
+    "White",
+    "Red",
+    "Orange",
+    "Yellow"
 }
 
 --[[ Number References]]
@@ -86,118 +86,131 @@ dealNumber = 13
 
 --[[ The onLoad event is called after the game save finishes loading. --]]
 function onLoad()
-	-- get current deck
-	getDeckFromZone()
-  -- get tile object
-  tile = getObjectFromGUID(tileGUID)
-  -- create draw cards button
-  tile.createButton({
-    click_function = 'buttonDrawCards',
-    label = "Draw Cards",
-    position = {0.75,0.2,0},
-    rotation = {0,-90,0},
-    width = 650,
-    height = 100,
-    font_size = 100
-  })
+    -- get current deck
+    getDeckFromZone()
+    -- get tile object
+    tile = getObjectFromGUID(tileGUID)
+    -- create draw cards button
+    tile.createButton(
+        {
+            click_function = "buttonDrawCards",
+            label = "Draw Cards",
+            position = {0.75, 0.2, 0},
+            rotation = {0, -90, 0},
+            width = 650,
+            height = 100,
+            font_size = 100
+        }
+    )
 
-  -- create reset cards button
-  tile.createButton({
-    click_function = 'buttonResetCards',
-    label = "Reset Cards",
-    position = {-0.75,0.2,0},
-    rotation = {0,90,0},
-    width = 650,
-    height = 100,
-    font_size = 100
-  })
+    -- create reset cards button
+    tile.createButton(
+        {
+            click_function = "buttonResetCards",
+            label = "Reset Cards",
+            position = {-0.75, 0.2, 0},
+            rotation = {0, 90, 0},
+            width = 650,
+            height = 100,
+            font_size = 100
+        }
+    )
 end
 
 --[[ The onUpdate event is called once per frame. --]]
 function onUpdate()
     --[[ print('onUpdate loop!') --]]
-		-- get current deck
-		getDeckFromZone()
+    -- get current deck
+    getDeckFromZone()
 end
 
 --[[ Shuffle and draw cards to all players]]
 function buttonDrawCards()
-  print("Draw Cards")
+    print("Draw Cards")
 
-  -- check if cards have been dealt already
-  if hasDealtCards == 1 then
-    return
-  end
+    -- check if cards have been dealt already
+    if hasDealtCards == 1 then
+        return
+    end
 
-  -- shuffle deck
-  deck.shuffle()
+    -- shuffle deck
+    deck.shuffle()
 
-  -- get all player colours and deal 13 cards to each player
-  allCurrentPlayerColors = Player.getAvailableColors()
-  for i, v in ipairs(allCurrentPlayerColors) do
-    deck.deal(dealNumber, Player[v].color)
-  end
+    -- get all player colours and deal 13 cards to each player
+    allCurrentPlayerColors = Player.getAvailableColors()
+    for i, v in ipairs(allCurrentPlayerColors) do
+        deck.deal(dealNumber, Player[v].color)
+    end
 end
 
 --[[ Reset cards back to original position]]
 function buttonResetCards()
-  print("Reset Cards")
+    print("Reset Cards")
 
-	-- get all cards into object list
-	local _allObjects = getAllObjects()
+    -- get all cards into object list
+    local _allObjects = getAllObjects()
 
-  for i, v in ipairs(_allObjects) do
-    if(v.guid ~= tileGUID and v.guid ~= boardGUID) then
-			v.setPosition(deckStartingPosition)
-			v.setRotation(deckStartingRotation)
+    for i, v in ipairs(_allObjects) do
+        if (v.guid ~= tileGUID and v.guid ~= boardGUID) then
+            v.setPosition(deckStartingPosition)
+            v.setRotation(deckStartingRotation)
+        end
     end
-  end
 end
 
 --[[ Sort Cards. --]]
 function sortCards(player, value, id)
-  -- get cards from owner's hand
-  local _myHand = player.getHandObjects()
+    -- get cards from owner's hand
+    local _myHand = player.getHandObjects()
 
-  -- get current positions of cards
-  local _currentCardPositions = {}
-  for i, v in ipairs(_myHand) do
-    _currentCardPositions[i] = v.getPosition()
-  end
+    -- get current positions of cards
+    local _currentCardPositions = {}
+    for i, v in ipairs(_myHand) do
+        _currentCardPositions[i] = v.getPosition()
+    end
 
-  local _myHandSorted = quicksort(_myHand)
+    local _myHandSorted = quicksort(_myHand)
 
-  for i, v in ipairs(_myHandSorted) do
-    v.setPosition(_currentCardPositions[i])
-  end
+    for i, v in ipairs(_myHandSorted) do
+        v.setPosition(_currentCardPositions[i])
+    end
 end
 
 --[[ sort algorithm (quick sort) --]]
 function quicksort(t)
-  if #t<2 then return t end
-  local pivot=tonumber(t[1].getName())
-  local a,b,c={},{},{}
-  for i, v in ipairs(t) do
-    if     tonumber(v.getName()) < pivot then a[#a+1]=v
-    elseif tonumber(v.getName()) > pivot then c[#c+1]=v
-    else                b[#b+1]=v
+    if #t < 2 then
+        return t
     end
-  end
-  a=quicksort(a)
-  c=quicksort(c)
-  for i ,v in ipairs(b) do a[#a+1]=v end
-  for i, v in ipairs(c) do a[#a+1]=v end
-  return a
+    local pivot = tonumber(t[1].getName())
+    local a, b, c = {}, {}, {}
+    for i, v in ipairs(t) do
+        if tonumber(v.getName()) < pivot then
+            a[#a + 1] = v
+        elseif tonumber(v.getName()) > pivot then
+            c[#c + 1] = v
+        else
+            b[#b + 1] = v
+        end
+    end
+    a = quicksort(a)
+    c = quicksort(c)
+    for i, v in ipairs(b) do
+        a[#a + 1] = v
+    end
+    for i, v in ipairs(c) do
+        a[#a + 1] = v
+    end
+    return a
 end
 
 function getDeckFromZone()
-	-- get all objects from zone
-	deckZone = getObjectFromGUID(deckZoneGUID).getObjects()
+    -- get all objects from zone
+    deckZone = getObjectFromGUID(deckZoneGUID).getObjects()
 
-	-- get deck only
-	for i, v in ipairs(deckZone) do
-		if v.guid ~= tileGUID then
-			deck = deckZone[i]
-		end
-	end
+    -- get deck only
+    for i, v in ipairs(deckZone) do
+        if v.guid ~= tileGUID then
+            deck = deckZone[i]
+        end
+    end
 end
