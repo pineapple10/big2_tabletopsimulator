@@ -1,5 +1,5 @@
 --[[ Lua code. See documentation: https://api.tabletopsimulator.com/ --]]
--- #include Console/console++
+#include <vscode/console>
 
 --[[ GUID Static References]]
 tileGUID = 'eecb5f'
